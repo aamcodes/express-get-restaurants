@@ -11,6 +11,11 @@ app.get('/restaurants', async (req, res) => {
 	res.json(data);
 });
 
+app.get('/restaurants/:id', async (req, res) => {
+	let data = await Restaurant.findByPk(req.params.id);
+	res.json(data);
+});
+
 app.listen(port, () => {
 	sequelize.sync();
 	console.log('Your server is listening on port ' + port);
