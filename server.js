@@ -65,10 +65,8 @@ app.put('/restaurants/:id', async (req, res) => {
 		if (!name || !location || !cuisine) {
 			res.status(400).json({ message: 'All fields are required' });
 		}
-		let restaurant;
 		await Restaurant.findByPk(id)
-			.then((existingRestaurant) => {
-				restaurant = existingRestaurant;
+			.then((restaurant) => {
 				restaurant.set({
 					name: name,
 					location: location,
@@ -89,9 +87,9 @@ app.delete('/restaurants/:id', async (req, res) => {
 	try {
 		let { id } = req.params;
 		await Restaurant.findByPk(id)
-			.then((foundRestaurant) => {
-				foundRestaurant.destroy();
-				res.status(201).json({ removed: foundRestaurant });
+			.then((restaurant) => {
+				restaurant.destroy();
+				res.status(201).json({ removed: restaurant });
 			})
 			.catch((err) => {
 				res.status(404).json({ message: 'No restaurant found' });
