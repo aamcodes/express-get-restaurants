@@ -68,9 +68,9 @@ app.put('/restaurants/:id', async (req, res) => {
 		await Restaurant.findByPk(id)
 			.then((restaurant) => {
 				restaurant.set({
-					name: name,
-					location: location,
-					cuisine: cuisine,
+					name,
+					location,
+					cuisine,
 				});
 				restaurant.save();
 				res.status(201).json(restaurant);
