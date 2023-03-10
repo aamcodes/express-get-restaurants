@@ -35,7 +35,9 @@ router.post(
 	'/',
 	[
 		check(['name', 'location', 'cuisine']).not().isEmpty().trim(),
-		check('name').isLength({ min: 10, max: 30 }),
+		check('name')
+			.isLength({ min: 10, max: 30 })
+			.withMessage('name must be at least 10 - 30 characters long'),
 	],
 	async (req, res) => {
 		try {
